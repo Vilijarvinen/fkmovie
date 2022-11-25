@@ -49,8 +49,11 @@ valinta.addEventListener("change", function () {
     var valinta = document.getElementById("teatteriv").value;
     var valintaid = valinta.substring(0, 4);
     console.log(valintaid);
+    //URL määritelty ennen fetch komentoa, jotta sain varmistettua, että se tulee oikein valintaid:n kanssa
+    var url = 'https://www.finnkino.fi/xml/Events/?area=${' + valintaid + '}/?listType=${NowInTheatres}'
+    console.log(url);
     //...fetchillä haetaan taas dataa ja käsitellään sitä...
-    fetch('https://www.finnkino.fi/xml/Events/?area=${' + valintaid + '}/?listType=${NowInTheatres}')
+    fetch(url)
         .then((response) => response.text())
         .then((data) => xml = parser.parseFromString(data, "text/xml"))
         .then((xml) => {
@@ -132,7 +135,7 @@ valinta.addEventListener("change", function () {
                 var nytpnyt = nytp.substring(10);
                 //...otetaan viivat pois välistä, jotta aikaa voidaan verrata nykyhetkeen...
                 var nytpv = nytpnyt.replaceAll("-", "");
-                console.log(nytpv);
+                //console.log(nytpv);
                 //...sitten määritellään uudet divit esityksessä oleville ja tulossa oleville...
                 var tul = document.createElement("div");
                 tul.setAttribute("id", "tulo");
