@@ -63,6 +63,7 @@ valinta.addEventListener("change", function () {
                 var div2 = document.createElement("div");
                 var br = document.createElement("br");
                 var br2 = document.createElement("br");
+                var br3 = document.createElement("br");
                 var p = document.createElement("p");
                 var img = document.createElement("img");
                 var leffakuva = xml.getElementsByTagName('EventSmallImagePortrait')[z].childNodes[0].nodeValue;
@@ -85,6 +86,7 @@ valinta.addEventListener("change", function () {
                 li.append(div2);
                 p.append("Julkaistu " + leffaVuosiKk);
                 li.append(p);
+                li.append(br3);
                 lista.appendChild(li);
                 //Käytännössä ainoa eroavaisuus aiempaan fetchiin on että tällä kertaa lisätään tietoa...
                 //...li elementtien kautta listaan
