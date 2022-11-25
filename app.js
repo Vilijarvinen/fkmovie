@@ -50,7 +50,7 @@ valinta.addEventListener("change", function () {
     var valintaid = valinta.substring(0, 4);
     console.log(valintaid);
     //URL määritelty ennen fetch komentoa, jotta sain varmistettua, että se tulee oikein valintaid:n kanssa
-    var url = 'https://www.finnkino.fi/xml/Events/?area=${' + valintaid + '}/?listType=${NowInTheatres}'
+    var url = 'https://www.finnkino.fi/xml/Events/?area=' + valintaid;
     console.log(url);
     //...fetchillä haetaan taas dataa ja käsitellään sitä...
     fetch(url)
