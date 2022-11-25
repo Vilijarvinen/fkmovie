@@ -121,5 +121,47 @@ valinta.addEventListener("change", function () {
                     sortataan = true;
                 }
             }
+            //Katsotaan onko elokuva/näytös esitykesssä
+            //Haetaan kaikki p elementit
+            var peet = document.querySelectorAll('p');
+            //Loopataan kaikki p elementit läpi...
+            for (var o = 0; o < peet.length; o++) {
+                //...määritellään muuttujaan käsittelyssä olevan p:n sisältö...
+                let nytp = peet[o].innerHTML;
+                //...leikataan alusta 10 merkkiä (Julkaistu )...
+                var nytpnyt = nytp.substring(10);
+                //...otetaan viivat pois välistä, jotta aikaa voidaan verrata nykyhetkeen...
+                var nytpv = nytpnyt.replaceAll("-", "");
+                console.log(nytpv);
+                //...sitten määritellään uudet divit esityksessä oleville ja tulossa oleville...
+                var tul = document.createElement("div");
+                tul.setAttribute("id", "tulo");
+                tul.innerHTML = "TULOSSA";
+                var esi = document.createElement("div");
+                esi.setAttribute("id", "esit");
+                esi.innerHTML = "ESITYKSESSÄ";
+                //Haetaan nykyhetki
+                var nykyHetki = new Date();
+                //Jostain syystä "nykyhetki" on 1 kk taaksepäin, joten lisätään kuukauteen 1
+                nykyHetki.setMonth(nykyHetki.getMonth() + 1);
+                //Lisätään myös päivään 1, jotta nähdään tänään esitykseen tulleet oikein
+                nykyHetki.setDate(nykyHetki.getDate() + 1);
+                //Määritellään vuosi, kk ja pv samaan järjestykseen datasta löytyvän päivämäärän kanssa...
+                var nyt = nykyHetki.getFullYear() + "/" + nykyHetki.getMonth() + "/" + nykyHetki.getDate();
+                //...poistetaan välistä turhat merkit...
+                var nytheti = nyt.replaceAll("/", "");
+                //Konsoli loki testaukseen (kommentoitu pois, koska se täyttää konsolin)
+                //console.log(nytheti);
+                //...jos julkaisupäivä aiemmin kuin "nykyhetki", eli huominen...
+                if (nytpv < nytheti) {
+                    //...käsittelyssä olevan p elementin vanhempaan lisätään div, joka määrittelee elokuvan/esityksen olevan esityksessä...
+                    peet[o].parentElement.appendChild(esi);
+                }
+                //...muutoin...
+                else {
+                    //...käsittelyssä olevan p elementin vanhempaan lisätään div, joka määrittelee elokuvan/esityksen olevan tulossa
+                    peet[o].parentElement.appendChild(tul);
+                }
+            };
         })
 });
